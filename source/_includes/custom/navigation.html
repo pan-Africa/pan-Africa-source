@@ -14,12 +14,24 @@
                 <li {% if page.navbar == 'About' %}class="active"{% endif %}>
                     <a href="{{ root_url }}/about">About</a>
                 </li>
-                <li {% if page.navbar == 'Blog' %}class="active"{% endif %}>
-                    <a href="{{ root_url }}/">Blog</a>
-                </li>
                 <li {% if page.navbar == 'Archives' %}class="active"{% endif %}>
                     <a href="{{ root_url }}/blog/archives">Archives</a>
                 </li>
+                <li class="dropdown">
+                  <a data-toggle="dropdown" id="recent-post-drop-down" class="dropdown-toggle" role="button" href="#">Recent Posts<b class="caret"></b></a>
+                  <ul aria-labelledby="recent-post-drop-down" role="menu" class="dropdown-menu">
+                    {% for post in site.posts limit: site.recent_posts %}
+                    <li role="presentation"><a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a></li>
+                    {% endfor %}
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a data-toggle="dropdown" id="recent-post-drop-down" class="dropdown-toggle" role="button" href="#">Categories<b class="caret"></b></a>
+                  <ul aria-labelledby="recent-post-drop-down" role="menu" class="dropdown-menu">
+                      {% category_list counter:true %}
+                  </ul>
+                </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
